@@ -40,6 +40,22 @@ vista = function( // Atacan - 20-12-2019
         download: null
     };
         
+    var heatmapDataPoint = {
+        x,
+        y,
+        value
+    };
+
+    var heatmapConfig = {
+        container: document.getElementById('heatmapContainer'),
+        radius: 10,
+        maxOpacity: .5,
+        minOpacity: 0,
+        blur: .75
+    };
+
+    var heatmapInstance = h337.create(heatmapConfig);    
+        
     /* Global Variables ENDS */
     
     /* File Module Functions STARTS */
@@ -605,4 +621,23 @@ vista = function( // Atacan - 20-12-2019
     });
     
     /* Function Calls ENDS */
+       
+    /* Heatmap Visualization starts */
+     function generateHeatmap(){
+
+        // storing data into heatmap data as arrays
+        for(var i = 0; projectedData.length > i; i++){
+            heatmapDataPoint.value = projectedData[2];
+            heatmapDataPoint.x = projectedData[3];
+            heatmapDataPoint.y = projectedData[4];
+
+            heatmapInstance.addData(heatmapDataPoint); //adds a single or multiple datapoints to the heatmaps' datastore.
+        }
+
+        heatmapInstance.configure(heatmapConfig); //Reconfigures a heatmap instance after it has been initialized. Triggers a complete rerendering.
+    }   
+        
+    /* Heatmap Visualization ends */
 };
+
+
