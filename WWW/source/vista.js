@@ -1,4 +1,4 @@
-vista = function(
+vista = function( // Atacan - 20-12-2019
         listener,
         mapContainer,
         size,
@@ -44,13 +44,13 @@ vista = function(
     
     /* File Module Functions STARTS */
         
-    this.readFile = function(file){
-        if(file.files && file.files.length > 0){
+    this.readFile = function(file){ //uploading the data file
+        if(file.files && file.files.length > 0){ //if there is at least 1 file that is uploaded
 
             for(var i = 0; file.files.length > i; i++){
-                var reader = new FileReader();
-                reader.onload = fileLoader;
-                reader.readAsText(file.files[i]);
+                var reader = new FileReader(); //calls the FileReader function and stored in reader var
+                reader.onload = fileLoader; //executes the fileLoader function upon onening > .onload event occurs when the object has been loaded. mostly used with <body> element to execute a script once a web page has completely loaded all content
+                reader.readAsText(file.files[i]); //.readAsText reads the contents of the specified file. when complete, readyState=DONE, loadend is triggered and result contains the contents of the file as a text string
             }
         }
     };
@@ -58,24 +58,24 @@ vista = function(
     var fileLoader = function(event){
         data.lastFileID++;
 
-        var fileContent = event.target.result;	
-        var lines = fileContent.split(/\r\n/);
+        var fileContent = event.target.result;	//result stored in fileContent var
+        var lines = fileContent.split(/\r\n/); //splits the text file by lines (satırlara ayırıyoruz)
         
         var fileHeaders = new Array();
-        fileHeaders = lines[0].split(/\t/);
+        fileHeaders = lines[0].split(/\t/); // we take the headers of the file, splitted by tabs (remove the tabs), store in fileHeaders
 
         var fileData = new Array();
-        for(var i = 1; lines.length > i; i++){
-            var temp = lines[i].split(/\t/);
-            if(temp != ""){
-                fileData[i-1] = new Object();
+        for(var i = 1; lines.length > i; i++){ //increment until you reach the line length
+            var temp = lines[i].split(/\t/); //split the line by tabs (remove the tabs), store the objects in temp
+            if(temp != ""){ //if temp is not space
+                fileData[i-1] = new Object(); //store that element as object in array
 
-                for(var k = 0; temp.length > k; k++){
-                    var indexName = fileHeaders[k];
+                for(var k = 0; temp.length > k; k++){ //check temp(line) length, increment k accordingly
+                    var indexName = fileHeaders[k]; //hold header name [kth one] in indexName
                     fileData[i-1][indexName] = temp[k];
-                }
+                } // this for loop puts each element of line[i] (i>=1) into fileData[i-1] array by corresponding each element to its header fileData[i-1][indexName]=temp[k]
             }
-        }
+        } // this for loop executes the inside for loop for every line after the headers
 
         parseData(projectData(fileHeaders, fileData,
                 ["index","timestamp","fixDuration","posX","posY","stimuliName"]),data.lastFileID);
@@ -85,12 +85,13 @@ vista = function(
     
     /* Data Module Functions STARTS */
     
+    // the projectData function takes the fileData contents and stores them in the projectedData variable, we basically re-store the line elements 1-by-1
     function projectData(fileHeaders, fileData, originalHeaders){
         var projectedData = new Array();
 
         for(var i = 0; fileData.length > i; i++){
             projectedData[i] = new Object(); 
-            for(var j  = 0; originalHeaders.length > j; j++){
+            for(var j  = 0; originalHeaders.length > j; j++){ // j<5
                 var newIndexName = originalHeaders[j];
                 var oldIndexName = fileHeaders[j];
 
@@ -105,7 +106,7 @@ vista = function(
         var lastCategoryName = "";
 
         for(var i = 0; projectedData.length > i; i++){
-            var categoryName = projectedData[i][data.headerConvention[5]];
+            var categoryName = projectedData[i][data.headerConvention[5]]; //holds stimuliName (webpage you look at)
 
             if(checkCategoryName(categoryName)){
                 if(!isCategoryExist(categoryName)){
@@ -143,7 +144,7 @@ vista = function(
     
     /* Category Functions STARTS */
     
-    function isCategoryExist(categoryName){
+    function isCategoryExist(categoryName){ //checks if the stimuli exists
         for(var i = 0; data.categories.length > i; i++){
             if(data.categories[i].name == categoryName){
                 return true;
@@ -153,7 +154,7 @@ vista = function(
         return false;
     }
     
-    function findCategoryIndex(categoryName){
+    function findCategoryIndex(categoryName){ //returns the index of the stimuli
         var categoryIndex;
         for(categoryIndex = 0; data.categories[categoryIndex].name != categoryName; categoryIndex++);
 
