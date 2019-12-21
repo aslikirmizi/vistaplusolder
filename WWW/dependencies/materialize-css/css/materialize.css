@@ -195,6 +195,10 @@
   color: #D50000 !important;
 }
 
+black {/* I added these bilal 21 december*/
+    background-color: #111111
+}
+
 .pink {
   background-color: #e91e63 !important;
 }

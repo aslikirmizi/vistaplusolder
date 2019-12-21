@@ -1,6 +1,7 @@
-﻿<html>
+<html>
 
 <head>
+    <!-- Libraries used to create the web tool-->
     <script src="dependencies/jquery/jquery.min.js"></script>
     <script src="dependencies/vis/vis-network.min.js"></script>
     <script src="dependencies/html2canvas/html2canvas.min.js"></script>
@@ -12,23 +13,27 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="dependencies/vistaplus.css">
 
-    <script src="source/vista.js"></script>
+    <script src="source/vista.js"></script><!--source code-->
     <link rel="stylesheet" href="source/vista.css">
     <meta charset="utf-8" />
     <link rel="shortcut icon" href="fav.ico" />
-    <title>ViSTA - Main</title>
+    <title>Welcome to Vista +</title><!--header-->
+
 </head>
 
 <body>
-    <nav class="nav-extended light-blue darken-1">
+    <nav class="nav-extended black">
+        
         <div class="nav-wrapper">
+           
             
             <div style="padding: 5px;" class="col s12">
-                <li class="active"><a href="infopage.html">How it works?</a></li>
+                
                 <div id="bannerimage"></div>
             </div>
 
         </div>
+        
         <div class="nav-content">
             <a href="" download="save.png" id="imageDownloadTrigger" style="margin-right: 60px;" class="btn-floating btn-large halfway-fab waves-effect waves-light teal amber hide">
                 <i class="material-icons unselectable">get_app</i>
@@ -47,14 +52,15 @@
             <div style="padding: 0px;" class="card-panel outer">
                 
                 <ul id="visualMethodSelector" class="tabs">
-                    <li id="methodGazePath" data-type="GAZEPATH" class="tab col s2 disabled">
-                        <a class="active" href="#">
-                            Gaze
-                            Path
-                        </a>
+                    <li id="methodGazePath" data-type="GAZEPATH" class="tab col s2 disabled"><a class="active" href="#">Gaze Path</a>
                     </li>
+                    
+                    <!-- heatmap function will be binded to here-->
+                    <li id="methodHeatMap" data-type="HEATMAP" class="tab col s2 disabled"><a href ="#">Heat Map</a></li>
+                    <!-- heatmap function will be binded to here-->
+                    
                     <li id="methodSTAMap" data-type="STAMAP" class="tab col s2 disabled"><a href="#">STA</a></li>
-
+                    
                 </ul>
                 <div class="outer">
                     <div id="background" style="z-index: 1;"></div>
