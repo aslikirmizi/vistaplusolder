@@ -115,6 +115,7 @@ vista = function( // Atacan - 20-12-2019
             }
         }
 
+        generateHeatmap(heatmapDataPoint, projectedData); // added by atacan to see if heatmap generation will work
         return projectedData;
     }
     
@@ -623,7 +624,7 @@ vista = function( // Atacan - 20-12-2019
     /* Function Calls ENDS */
        
     /* Heatmap Visualization starts */
-     function generateHeatmap(){
+     function generateHeatmap(heatmapDataPoint, projectedData){
 
         // storing data into heatmap data as arrays
         for(var i = 0; projectedData.length > i; i++){
